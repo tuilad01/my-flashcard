@@ -1,0 +1,10 @@
+.data-table__control-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0;
+}
+
+.data-table__row {
+    cursor: pointer;
+}

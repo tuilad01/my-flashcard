@@ -1,0 +1,18 @@
+.form-group {
+    width: 100%;
+}
+
+.form-group__control-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.list-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.list-item > div:first-child {
+    width: 2rem;
+}
