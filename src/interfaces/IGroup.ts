@@ -1,12 +1,12 @@
+import { v4 as uuid } from 'uuid';
 import { ISentence } from "./ISentence";
-
 export enum Prioprity {
     vi = "vi",
     en = "en"
 }
 
 export interface IGroup {
-    id?: string,
+    id: string,
     name: string,
     description: string,
     sentences: ISentence[],
@@ -17,7 +17,7 @@ export interface IGroup {
 }
 
 export default class Group implements  IGroup {
-    id?: string;
+    id: string;
     name: string;
     description: string;
     sentences: ISentence[];
@@ -27,6 +27,7 @@ export default class Group implements  IGroup {
     createdAt: Date;
 
     constructor(name: string, description?: string) {
+        this.id = uuid();
         this.name = name;
         this.description = description || "";
         this.sentences = [];

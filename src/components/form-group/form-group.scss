@@ -1,11 +1,13 @@
 .form-group {
     width: 100%;
+    margin: 0.5rem 0;
 }
 
 .form-group__control-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0.5rem 0 2rem;
 }
 .list-item {
     display: flex;

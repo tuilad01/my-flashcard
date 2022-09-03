@@ -13,13 +13,13 @@ import Data from './mockData';
 function App() {
 
   return (
-    <div className="App">
+    //<div className="App">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="group/:groupId" element={<GroupPage />} />
         <Route path="group/add" element={<GroupPage />} />
       </Routes>      
-    </div>
+    //</div>
   );
 }
 

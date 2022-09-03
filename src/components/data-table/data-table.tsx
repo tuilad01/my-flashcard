@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import Form from 'react-bootstrap/Form'
 import Row from "./row";
@@ -11,8 +11,8 @@ import DataTableConst from "./data-table-const";
 
 
 const prepareDataSource = (dataSource: any[]) => {
-    return dataSource.map(data => {
-        return { ...data, [DataTableConst.SELECTED_FIELD_NAME]: false }
+    return dataSource.map(row => {
+        return { ...row, [DataTableConst.SELECTED_FIELD_NAME]: false }
     })
 }
 
@@ -21,19 +21,23 @@ function DataTable({ dataSource, columns, onAdd, onDelete, onDeleteAll, onEdit }
     {
         dataSource: any[],
         columns: IColumn[],
-        onAdd?: (item: any) => void,
+        onAdd?: () => void,
         onDelete?: (item: any) => void,
         onDeleteAll?: (items: any[]) => void,
         onEdit?: (item: any) => void,
     }) {
 
-    dataSource = prepareDataSource(dataSource);
-
-    const [data, setData] = useState(dataSource);
+    const mappedDataSource = prepareDataSource(dataSource);
+    console.log("data table loaded")
+    const [data, setData] = useState<any[]>([]);
     const [isSelectedAll, setIsSelectedAll] = useState(false);
 
+    useEffect(() => {
+        setData(mappedDataSource)
+        console.log("data table useEffect")
+    },[dataSource])
 
-    const onSelect = (index: number) => {
+    const onSelect = (index: number) => {        
         data[index][DataTableConst.SELECTED_FIELD_NAME] = !data[index][DataTableConst.SELECTED_FIELD_NAME]
 
         const _isSelectedAll = data.filter(row => row[DataTableConst.SELECTED_FIELD_NAME]).length == data.length
@@ -55,7 +59,7 @@ function DataTable({ dataSource, columns, onAdd, onDelete, onDeleteAll, onEdit }
     }
 
     const _onAdd = () => {
-
+        onAdd && onAdd();
     }
 
     const _onDelete = (event: React.MouseEvent<HTMLButtonElement>, index: number) => {
@@ -78,8 +82,8 @@ function DataTable({ dataSource, columns, onAdd, onDelete, onDeleteAll, onEdit }
         setData([...newData])
     }
 
-    const _onEdit = () => {
-
+    const _onEdit = (index: number) => {
+        onEdit && onEdit(data[index])
     }
 
     const onSearch = (query: string) => {
@@ -111,12 +115,11 @@ function DataTable({ dataSource, columns, onAdd, onDelete, onDeleteAll, onEdit }
     }
 
     const selectedCount = data.filter(row => row[DataTableConst.SELECTED_FIELD_NAME]).length
-
     return (
         <div className="data-table">
             <div className="data-table__control-bar">
                 <div className="data-table__control-bar__left">
-                    <Button variant="primary" onClick={() => console.log("Add")}>
+                    <Button variant="primary" onClick={() => _onAdd()}>
                         Add
                     </Button>
                     <Button variant="danger" className="mx-2" onClick={_onDeleteAll}>
@@ -132,12 +135,9 @@ function DataTable({ dataSource, columns, onAdd, onDelete, onDeleteAll, onEdit }
                     <tr>
                         <th><input type="checkbox" checked={isSelectedAll} onChange={e => onSelectAll(e.currentTarget.checked)} /></th>
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Total sentence</th>
-                        <th>Priority</th>
-                        <th>Created at</th>
-                        <th>Updated at</th>
+                        {columns.map((column: IColumn, index: number) => {
+                            return (<th key={`${DataTableConst.HEADER_COLUMN_KEY}_${index}`}>{column.displayedName}</th>)
+                        })}
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -151,6 +151,7 @@ function DataTable({ dataSource, columns, onAdd, onDelete, onDeleteAll, onEdit }
                                 index={index}
                                 onSelect={onSelect}
                                 onDelete={_onDelete}
+                                onEdit={_onEdit}
                                 key={`${DataTableConst.ROW_KEY}_${index}`}
                             />
                         )
