@@ -16,7 +16,7 @@ export interface IGroup {
     createdAt: Date,
 }
 
-export default class Group implements  IGroup {
+export default class Group implements IGroup {
     id: string;
     name: string;
     description: string;
@@ -26,11 +26,11 @@ export default class Group implements  IGroup {
     updatedAt: Date;
     createdAt: Date;
 
-    constructor(name: string, description?: string) {
+    constructor(name: string, description?: string, sentences?: ISentence[]) {
         this.id = uuid();
         this.name = name;
         this.description = description || "";
-        this.sentences = [];
+        this.sentences = sentences || [];
         this.priority = Prioprity.vi;
         this.count = 0;
         this.createdAt = new Date();

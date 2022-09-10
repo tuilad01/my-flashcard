@@ -9,13 +9,15 @@ import HomePage from './pages/home';
 import GroupPage from './pages/group';
 
 import Data from './mockData';
+import ShiftSchedule from './pages/shift-schedule';
 
 function App() {
 
   return (
     //<div className="App">
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        {/* <Route path="/" element={<HomePage />} /> */}
+        <Route path="/" element={<ShiftSchedule />} />
         <Route path="group/:groupId" element={<GroupPage />} />
         <Route path="group/add" element={<GroupPage />} />
       </Routes>      
