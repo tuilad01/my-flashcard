@@ -2,8 +2,8 @@ import DataTable from "../components/data-table/data-table";
 //import Data from "../mockData";
 import { useNavigate } from "react-router-dom";
 
-import manageIndexedDb from "../datastore/manageIndexedDb";
-import GroupSchema from "../datastore/schemas/group-schema";
+// import manageIndexedDb from "../datastore/manageIndexedDb";
+// import GroupSchema from "../datastore/schemas/group-schema";
 import Group, { IGroup } from "../interfaces/IGroup";
 import { ColumnType, IColumn } from "../interfaces/IColumn";
 import React, { useEffect, useState } from "react";

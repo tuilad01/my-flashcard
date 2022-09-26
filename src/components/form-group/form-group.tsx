@@ -8,8 +8,8 @@ import './form-group.scss';
 import { useEffect, useState } from "react";
 import { IGroup } from "../../interfaces/IGroup";
 import { IColumn } from "../../interfaces/IColumn";
-import manageIndexedDb from "../../datastore/manageIndexedDb";
-import GroupSchema from "../../datastore/schemas/group-schema";
+// import manageIndexedDb from "../../datastore/manageIndexedDb";
+// import GroupSchema from "../../datastore/schemas/group-schema";
 
 const columns: IColumn[] = [
     {
@@ -30,32 +30,32 @@ const columns: IColumn[] = [
 
 
 function FormGroup({ id }: { id?: string }) {
-    const [show, setShow] = useState(false);
-    const [group, setGroup] = useState<IGroup | null>(null)
+    // const [show, setShow] = useState(false);
+    // const [group, setGroup] = useState<IGroup | null>(null)
 
-    let navigate = useNavigate()
+    // let navigate = useNavigate()
 
-    useEffect(() => {
-        if (id) {
-            manageIndexedDb.get(GroupSchema.storeName, id)
-                .then(gr => {
-                    setGroup(gr)
-                })
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (id) {
+    //         manageIndexedDb.get(GroupSchema.storeName, id)
+    //             .then(gr => {
+    //                 setGroup(gr)
+    //             })
+    //     }
+    // }, [])
 
-    const onClose = () => setShow(false);
+    // const onClose = () => setShow(false);
 
-    const onAdd = () => {
-        setShow(true);
-    }
+    // const onAdd = () => {
+    //     setShow(true);
+    // }
 
 
 
     return (
 
         <>
-            <div className="form-group">
+            {/* <div className="form-group">
                 <div className="form-group__control-bar">
                     <div className="form-group__control-bar__left">
                         <Button variant="info" onClick={() => navigate("/")}>
@@ -112,8 +112,6 @@ function FormGroup({ id }: { id?: string }) {
                     </Col>
                 </Row>
 
-
-                {/*  devider */}
                 <hr />
 
                 <DataTable
@@ -156,7 +154,9 @@ function FormGroup({ id }: { id?: string }) {
                     </Button>
                     <Button variant="primary" >Save</Button>
                 </Modal.Footer>
-            </Modal>
+            </Modal> */}
+
+            form group
         </>
     );
 }

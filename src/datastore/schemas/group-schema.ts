@@ -1,16 +1,5 @@
-import { ISchema } from "./ISchema"
+import { Schema } from "../schema";
 
-const GroupSchema: ISchema = {
-    storeName: "Group",
-    key: { keyPath: "id", autoIncrement: true },
-    indexes: [
-        {
-            name: "id_index",
-            field: "id",
-            unique: true
-        }
-    ],
+export class GroupSchema extends Schema {
+    protected readonly _global_objectStore: string = "Group"
 }
-
-
-export default GroupSchema
