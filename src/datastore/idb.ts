@@ -1,6 +1,6 @@
 export class Idb {
     // indexed db name and version
-    private _idbName = process.env.REACT_APP_INDEXEDDB_NAME || "myidb_test2"
+    private _idbName = process.env.REACT_APP_INDEXEDDB_NAME || "myidb"
     private _idbVersion = process.env.REACT_APP_INDEXEDDB_VERSION ? +process.env.REACT_APP_INDEXEDDB_VERSION : 1
     // object stores
     protected _objectStoreNamesRegister: string[] = []
@@ -274,13 +274,17 @@ export class Idb {
             result = await new Promise<any>((resolve) => {
                 objectStore.openCursor().onsuccess = (event: any) => {
                     const cursor = event.target.result;
+                    let continute = true;
                     if (cursor) {
                         for (const key in query) {
                             if (cursor.value[key] == query[key]) {
+                                continute = false
                                 resolve(cursor.value)
                             }
                         }
-                        cursor.continue();
+                        if (continute) {
+                            cursor.continue();
+                        }
                     } else {
                         resolve(null)
                     }
